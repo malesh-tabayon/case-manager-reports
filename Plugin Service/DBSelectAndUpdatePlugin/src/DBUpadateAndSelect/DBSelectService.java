@@ -1,10 +1,21 @@
 package DBUpadateAndSelect;
 
+import java.awt.List;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DBUpadateAndSelect.Conn.ConnectionDataBase;
+
 import com.ibm.ecm.extension.PluginService;
 import com.ibm.ecm.extension.PluginServiceCallbacks;
+
+import DBUpadateAndSelect.Models.WorkItem;
+
 
 /**
  * Provides an abstract class that is extended to create a class implementing
@@ -71,7 +82,18 @@ public class DBSelectService extends PluginService {
 	public void execute(PluginServiceCallbacks callbacks,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		
+		 String sqlStmt= "{ call dbo.SelectAllTransactions()}";
+		 CallableStatement callStmt;
+		 Connection conn;
+		 ArrayList<WorkItem> workItems=new ArrayList<WorkItem>();
+		conn=ConnectionDataBase.getConnection();
+		callStmt=conn.prepareCall(sqlStmt); 
+		ResultSet rstSet=callStmt.executeQuery();
+		WorkItem workItem=null;
+		if (rstSet.next())
+		{
+			workItem.setWho("");
+		}
 
 	}
 }

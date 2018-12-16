@@ -1,4 +1,4 @@
-package DBUpadateAndSelect.DAO;
+package DBUpadateAndSelect.Conn;
 
 
 import java.sql.Connection;
@@ -9,21 +9,24 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
-public abstract class ConnectionDataBase {
-	protected Connection conn;
-public final void getConnection() throws SQLException, NamingException
-{
-	Context context;
+public  class ConnectionDataBase {
+	public  static Connection conn;
+ 
+	public static Connection getConnection() throws SQLException, NamingException
+	{
+		
     InitialContext initContext;
     javax.sql.DataSource source = null;
-	if ((this.conn == null) || (this.conn.isClosed())) {
+	if ((conn == null) || (conn.isClosed())) {
 		String dataSource = getDataSourceName();
 		 Hashtable<String, String> hashtable = new Hashtable<String, String>();
          hashtable.put("java.naming.factory.initial", "com.ibm.websphere.naming.WsnInitialContextFactory");
          initContext = new InitialContext(hashtable);
          source = (javax.sql.DataSource)initContext.lookup(dataSource);
          conn=source.getConnection();
+         
 	} 
+	return conn;
 	
 }
 private static String getDataSourceName() {
