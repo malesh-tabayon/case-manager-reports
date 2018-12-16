@@ -1,0 +1,26 @@
+{
+	"Name":"IBM Case Manager Custom Widget Tracking Movement",
+	"Description":"IBM Case Manager Custom Widget Package",
+	"Locale":"",
+	"Version":"1.0",
+	"Categories":[
+		{
+			"id":"CustomWidgets",
+			"title":"Custom Widgets"
+		}
+	],
+	"Widgets":[
+		{
+			"id":"ICMSampleWidgetTrackingMovement",
+			"title":"Tracking Movement Custom Widget",
+			"category":"CustomWidgets",
+			"description":"Tracking Movement Custom Widget",
+			"definition":"ICMSampleWidgetTrackingMovement.json",
+			"preview":"images/comment_preview.png",
+			"icon":"images/comment_icon.png",
+			"runtimeClassName":"icmsample.pgwidget.trackingmovement.ICMSampleWidgetTrackingMovement",
+			"help":"",
+			"previewThumbnail":"images/comment_thumb.png"
+		}
+	]
+}
