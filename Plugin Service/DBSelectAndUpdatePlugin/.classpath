@@ -21,5 +21,7 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="lib/j2ee.jar"/>
 	<classpathentry kind="lib" path="C:/Program Files/Java/navigatorAPI.jar"/>
+	<classpathentry kind="lib" path="lib/gson-2.8.5.jar"/>
+	<classpathentry kind="lib" path="lib/jdbc-api-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

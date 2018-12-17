@@ -8,6 +8,7 @@
 		<pathelement location="C:/Program Files/Java/navigatorAPI.jar" />
 		<pathelement location="./lib/j2ee.jar" />
 		<pathelement location="./lib/jdbc-api-1.4.jar"/>
+		<pathelement location="./lib/gson-2.8.5.jar"/>
 		<pathelement location="./temp" />
 	</path>
 
@@ -29,6 +30,8 @@
 				<include name="**/WebContent/**" />
 			</fileset>
 		</copy>
+		<unzip src="./lib/jdbc-api-1.4.jar" dest="./temp"/>
+		<unzip src="./lib/gson-2.8.5.jar" dest="./temp"/>	
 		<jar jarfile="DBSelectAndUpdatePlugin.jar">
 			<fileset dir="./temp" includes="**/*" />
 			<manifest>

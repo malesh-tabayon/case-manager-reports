@@ -11,11 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import DBUpadateAndSelect.Conn.ConnectionDataBase;
 
+import com.google.gson.Gson;
 import com.ibm.ecm.extension.PluginService;
 import com.ibm.ecm.extension.PluginServiceCallbacks;
+import com.ibm.ecm.json.JSONResponse;
 
 import DBUpadateAndSelect.Models.WorkItem;
-
 
 /**
  * Provides an abstract class that is extended to create a class implementing
@@ -85,15 +86,26 @@ public class DBSelectService extends PluginService {
 		 String sqlStmt= "{ call dbo.SelectAllTransactions()}";
 		 CallableStatement callStmt;
 		 Connection conn;
+		// Gson gson=new Gson();
 		 ArrayList<WorkItem> workItems=new ArrayList<WorkItem>();
 		conn=ConnectionDataBase.getConnection();
 		callStmt=conn.prepareCall(sqlStmt); 
 		ResultSet rstSet=callStmt.executeQuery();
-		WorkItem workItem=null;
-		if (rstSet.next())
+		WorkItem workItem=new WorkItem();
+		while (rstSet.next())
 		{
-			workItem.setWho("");
+			workItem.setWho(rstSet.getString(1));
+			workItem.setReceviedAt(rstSet.getDate(2));
+			workItem.setCompletedAt(rstSet.getDate(3));
+			workItem.setStatus(rstSet.getString(6));
+			workItem.setStepName(rstSet.getString(9));
+			workItem.setStepOwner(rstSet.getString(10));
+			workItems.add(workItem);
 		}
-
+//		String result=gson.toJson(workItems);
+//        response.
+		JSONResponse jsonResults = new JSONResponse();
+		jsonResults.put("result", workItems);
+		jsonResults.serialize(response.getOutputStream());
 	}
 }

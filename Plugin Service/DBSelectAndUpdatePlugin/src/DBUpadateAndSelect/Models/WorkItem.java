@@ -10,6 +10,7 @@ public class WorkItem
 	private String status;
 	private Date receviedAt;
 	private String Who;
+	private Date completedAt;
 	public String getStepName() {
 		return stepName;
 	}
@@ -46,7 +47,13 @@ public class WorkItem
 	public void setWho(String who) {
 		Who = who;
 	}
-
+	public Date getCompletedAt() {
+		return completedAt;
+	}
+	public void setCompletedAt(Date completedAt) {
+		this.completedAt = completedAt;
+	}
+       
 	
 	
 }
