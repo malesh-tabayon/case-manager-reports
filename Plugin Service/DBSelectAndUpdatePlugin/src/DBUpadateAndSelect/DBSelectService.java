@@ -86,12 +86,13 @@ public class DBSelectService extends PluginService {
 		 String sqlStmt= "{ call dbo.SelectAllTransactions()}";
 		 CallableStatement callStmt;
 		 Connection conn;
-		// Gson gson=new Gson();
-		 ArrayList<WorkItem> workItems=new ArrayList<WorkItem>();
+		 Gson gson=new Gson();
+		 ArrayList workItems=new ArrayList();
 		conn=ConnectionDataBase.getConnection();
 		callStmt=conn.prepareCall(sqlStmt); 
 		ResultSet rstSet=callStmt.executeQuery();
 		WorkItem workItem=new WorkItem();
+		System.out.println("before loop");
 		while (rstSet.next())
 		{
 			workItem.setWho(rstSet.getString(1));
@@ -102,10 +103,10 @@ public class DBSelectService extends PluginService {
 			workItem.setStepOwner(rstSet.getString(10));
 			workItems.add(workItem);
 		}
-//		String result=gson.toJson(workItems);
-//        response.
+		System.out.println("After loop");
+		String result=gson.toJson(workItems);
 		JSONResponse jsonResults = new JSONResponse();
-		jsonResults.put("result", workItems);
+		jsonResults.put("result",result);
 		jsonResults.serialize(response.getOutputStream());
 	}
 }
