@@ -1,0 +1,14 @@
+{
+	"id":"StepTrackingReportWidget",
+	"title":"Step Tracking Report Widget",
+	"category":"CustomWidgets",
+	"description":"Table Data Grid To Track Every Step in Workflow",
+	"definition":"StepTrackingReportWidget.json",
+	"preview":"images/comment_preview.png",
+	"icon":"images/comment_icon.png",
+	"runtimeClassName":"steptrackingreport.pgwidget.StepTrackingReportWidget",
+	"help":"",
+	"previewThumbnail":"images/comment_thumb.png",
+	"properties":[],
+	"events":[]
+}
