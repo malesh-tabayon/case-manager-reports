@@ -91,10 +91,13 @@ public class DBSelectService extends PluginService {
 		conn=ConnectionDataBase.getConnection();
 		callStmt=conn.prepareCall(sqlStmt); 
 		ResultSet rstSet=callStmt.executeQuery();
-		WorkItem workItem=new WorkItem();
+		
 		System.out.println("before loop");
+		//System.out.println(rstSet);
 		while (rstSet.next())
 		{
+			System.out.println(rstSet.getString(9)+"  loop");
+			WorkItem workItem = new WorkItem();
 			workItem.setWho(rstSet.getString(1));
 			workItem.setReceviedAt(rstSet.getDate(2));
 			workItem.setCompletedAt(rstSet.getDate(3));
