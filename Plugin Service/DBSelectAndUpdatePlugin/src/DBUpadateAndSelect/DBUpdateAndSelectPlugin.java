@@ -346,7 +346,7 @@ public class DBUpdateAndSelectPlugin extends Plugin {
 	 */
 	public PluginService[] getServices() {
 		if (pluginServices.length == 0) {
-			pluginServices = new PluginService[] {new DBUpadateAndSelect.DBUpdateService(), new DBUpadateAndSelect.DBSelectService()};
+			pluginServices = new PluginService[] {new DBUpadateAndSelect.DBUpdateService(), new DBUpadateAndSelect.DBSelectService(),new DBUpadateAndSelect.DBSelectByIdGraphService(),new DBUpadateAndSelect.DBSelectByIdGridService()};
 		}
 		return pluginServices;
 	}

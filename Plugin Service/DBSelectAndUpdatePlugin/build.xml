@@ -5,10 +5,10 @@
 	<target name="all" depends="clean,compile,jar" />
 
 	<path id="classpath">
-		<pathelement location="C:/Program Files/Java/navigatorAPI.jar" />
+		<pathelement location="C:/Users/aali/Desktop/jars/navigatorAPI.jar" />
 		<pathelement location="./lib/j2ee.jar" />
 		<pathelement location="./lib/jdbc-api-1.4.jar"/>
-		<pathelement location="./lib/gson-2.8.5.jar"/>
+		<pathelement location="./lib/gson-2.2.2.jar"/>
 		<pathelement location="./temp" />
 	</path>
 
@@ -31,7 +31,7 @@
 			</fileset>
 		</copy>
 		<unzip src="./lib/jdbc-api-1.4.jar" dest="./temp"/>
-		<unzip src="./lib/gson-2.8.5.jar" dest="./temp"/>	
+		<unzip src="./lib/gson-2.2.2.jar" dest="./temp"/>	
 		<jar jarfile="DBSelectAndUpdatePlugin.jar">
 			<fileset dir="./temp" includes="**/*" />
 			<manifest>
