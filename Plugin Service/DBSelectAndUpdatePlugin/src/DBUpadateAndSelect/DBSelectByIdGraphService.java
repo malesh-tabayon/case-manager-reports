@@ -1,6 +1,5 @@
 package DBUpadateAndSelect;
 
-import java.awt.List;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -10,13 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DBUpadateAndSelect.Conn.ConnectionDataBase;
+import DBUpadateAndSelect.Models.WorkItem;
 
 import com.google.gson.Gson;
 import com.ibm.ecm.extension.PluginService;
 import com.ibm.ecm.extension.PluginServiceCallbacks;
 import com.ibm.ecm.json.JSONResponse;
-
-import DBUpadateAndSelect.Models.WorkItem;
 
 /**
  * Provides an abstract class that is extended to create a class implementing
@@ -33,7 +31,7 @@ import DBUpadateAndSelect.Models.WorkItem;
  * plug-in service. In particular, always assume multi-threaded use and do not
  * keep unshared information in instance variables.
  */
-public class DBSelectService extends PluginService {
+public class DBSelectByIdGraphService  extends PluginService {
 
 	/**
 	 * Returns the unique identifier for this service.
@@ -45,7 +43,7 @@ public class DBSelectService extends PluginService {
 	 * @return A <code>String</code> that is used to identify the service.
 	 */
 	public String getId() {
-		return "DBSelectService";
+		return "DBSelectByIdGraphService ";
 	}
 
 	/**
@@ -83,33 +81,32 @@ public class DBSelectService extends PluginService {
 	public void execute(PluginServiceCallbacks callbacks,
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		 String sqlStmt= "{ call dbo.SelectAllTransactions()}";
+		String caseId=request.getParameter("caseId");
+		 String sqlStmt=" call SELECT_BY_ID (?)";
 		 CallableStatement callStmt;
 		 Connection conn;
 		 Gson gson=new Gson();
 		 ArrayList workItems=new ArrayList();
 		conn=ConnectionDataBase.getConnection();
 		callStmt=conn.prepareCall(sqlStmt); 
+		callStmt.setString(1,caseId);
 		ResultSet rstSet=callStmt.executeQuery();
 		
-		System.out.println("before loop");
-		//System.out.println(rstSet);
+		System.out.println("before loop graph");
 		while (rstSet.next())
 		{
-			System.out.println(rstSet.getString(9)+"  loop");
+			System.out.println(rstSet.getString(9)+"  loop graph");
 			WorkItem workItem = new WorkItem();
-			workItem.setCreator(rstSet.getString(1));
-			workItem.setReceviedAt(rstSet.getDate(2));
-			workItem.setCompletedAt(rstSet.getDate(3));
-			workItem.setStatus(rstSet.getString(6));
+			workItem.setTime(workItem.getReceviedAt().getTime()-workItem.getCompletedAt().getTime());
 			workItem.setStepName(rstSet.getString(9));
-			workItem.setStepOwner(rstSet.getString(10));
 			workItems.add(workItem);
 		}
-		System.out.println("After loop");
+		System.out.println("After loop graph");
 		String result=gson.toJson(workItems);
 		JSONResponse jsonResults = new JSONResponse();
 		jsonResults.put("result",result);
 		jsonResults.serialize(response.getOutputStream());
 	}
-}
+
+	}
+
