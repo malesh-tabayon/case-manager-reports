@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="com.ibm.ecm.extension.PluginService"/>
+<fullyQualifiedTypeName name="com.ibm.ecm.extension.PluginServiceCallbacks"/>
+<fullyQualifiedTypeName name="com.ibm.ecm.json.JSONResponse"/>
+<fullyQualifiedTypeName name="DBUpadateAndSelect.DBUpdateAndSelectPlugin"/>
+<fullyQualifiedTypeName name="DBUpadateAndSelect.DBSelectByIdGridService"/>
+<fullyQualifiedTypeName name="java.text.DecimalFormat"/>
+</qualifiedTypeNameHistroy>

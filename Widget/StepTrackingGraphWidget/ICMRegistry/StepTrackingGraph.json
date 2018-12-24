@@ -1,0 +1,23 @@
+{
+	"id":"StepTrackingGraphWidgetWidget",
+	"title":"Step Tracking Graph Widget",
+	"category":"CustomWidgets",
+	"description":"StepTrackingGraph ",
+	"definition":"StepTrackingGraph.json",
+	"preview":"images/comment_preview.png",
+	"icon":"images/comment_icon.png",
+	"runtimeClassName":"steptrackinggraph.stgwidget.StepTrackingGraph",
+	"help":"",
+	"previewThumbnail":"images/comment_thumb.png",
+	"properties":[],
+	"events":[
+	
+		{
+			"id": "custom.steptrackinggraphwidget",
+			"title": "receiveEventPageOpened",
+			"functionName": "receiveEventPageOpened",
+			"direction": "subscribed",
+			"description": "caseAdded"
+		}
+	]
+}

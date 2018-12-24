@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<project name="DBSelectAndUpdatePlugin" default="all" basedir=".">
+
+	<target name="all" depends="clean,compile,jar" />
+
+	<path id="classpath">
+		<pathelement location="C:/Users/aali/Desktop/jars/navigatorAPI.jar" />
+		<pathelement location="./lib/j2ee.jar" />
+		<pathelement location="./lib/jdbc-api-1.4.jar"/>
+		<pathelement location="./lib/gson-2.8.5.jar"/>
+		<pathelement location="./temp" />
+	</path>
+
+	<target name="clean">
+		<delete dir="temp" />
+	</target>
+
+	<target name="compile">
+		<mkdir dir="temp" />
+		<javac srcdir="src" destdir="temp" source="1.6" target="1.6" debug="true">
+			<classpath refid="classpath" />
+			<include name="**/*.java" />
+		</javac>
+	</target>
+
+	<target name="jar">
+		<copy todir="temp">
+			<fileset dir="src">
+				<include name="**/WebContent/**" />
+			</fileset>
+		</copy>
+		<unzip src="./lib/jdbc-api-1.4.jar" dest="./temp"/>
+		<unzip src="./lib/gson-2.8.5.jar" dest="./temp"/>	
+		<jar jarfile="DBSelectAndUpdatePlugin.jar">
+			<fileset dir="./temp" includes="**/*" />
+			<manifest>
+				<attribute name="Plugin-Class" value="DBUpadateAndSelect.DBUpdateAndSelectPlugin" />
+				<section name="build">
+					<attribute name="Built-By" value="${user.name}" />
+					<attribute name="Build" value="${TODAY}" />
+				</section>
+			</manifest>
+		</jar>
+		<delete dir="./temp" />
+	</target>
+
+</project>

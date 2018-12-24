@@ -1,0 +1,26 @@
+{
+	"Name":"IBM Case Manager Custom Widget Package",
+	"Description":"Step Tracking Graph ",
+	"Locale":"",
+	"Version":"1.0",
+	"Categories":[
+		{
+			"id":"CustomWidgets",
+			"title":"Custom Widgets"
+		}
+	],
+	"Widgets":[
+		{
+			"id":"StepTrackingGraphWidgetWidget",
+			"title":"Step Tracking Graph Widget",
+			"category":"CustomWidgets",
+			"description":"StepTrackingGraph ",
+			"definition":"StepTrackingGraph.json",
+			"preview":"images/comment_preview.png",
+			"icon":"images/comment_icon.png",
+			"runtimeClassName":"steptrackinggraph.stgwidget.StepTrackingGraph",
+			"help":"",
+			"previewThumbnail":"images/comment_thumb.png"
+		}
+	]
+}
