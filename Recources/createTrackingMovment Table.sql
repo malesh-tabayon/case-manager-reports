@@ -1,6 +1,7 @@
+
 CREATE TABLE [dbo].[TrackingMovment](
 	[creater] [varchar](50) NULL,
-	[recevied_at] [datetime] NULL,
+	[recevied_at] [datetime] default SYSDATETIME() ,
 	[completed_at] [datetime] NULL,
 	[completed_by] [varchar](50) NULL,
 	[step_id] [varchar](50) NULL,
