@@ -83,32 +83,30 @@ public class DBSelectByIdGridService extends PluginService {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String caseId=request.getParameter("caseId");
-		 String sqlStmt=" call SELECT_BY_ID (?)";
+		 String sqlStmt=" {call SELECT_BY_ID(?) }";
 		 CallableStatement callStmt;
 		 Connection conn;
 		 Gson gson=new Gson();
 		 ArrayList workItems=new ArrayList();
-		 DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
 		conn=ConnectionDataBase.getConnection();
 		callStmt=conn.prepareCall(sqlStmt); 
-		callStmt.setString(1,caseId);
 		ResultSet rstSet=callStmt.executeQuery();
 		
 		System.out.println("before loop grid" );
 		while (rstSet.next())
 		{
-			System.out.println(rstSet.getString(9)+"  loop grid");
+			System.out.println(rstSet.getString(7)+"  loop grid");
 			WorkItem workItem = new WorkItem();
 			workItem.setCreator(rstSet.getString(1));
 			workItem.setReceviedAt(rstSet.getDate(2));
 			workItem.setCompletedAt(rstSet.getDate(3));
 			if(rstSet.getDate(3)!=null){
-			//workItem.setTime(workItem.getReceviedAt().getTime()-workItem.getCompletedAt().getTime());
-			long diff =rstSet.getDate(2).getTime()-rstSet.getDate(2).getTime()/ (60 * 60 * 1000);
-			workItem.setTime(crunchifyFormatter.format(diff));
-			}workItem.setStatus(rstSet.getString(6));
-			workItem.setStepName(rstSet.getString(9));
-      		workItem.setStepOwner(rstSet.getString(10));
+			workItem.setTime(rstSet.getInt(10));
+			
+			}
+			workItem.setStatus(rstSet.getString(6));
+			workItem.setStepName(rstSet.getString(7));
+      		workItem.setStepOwner(rstSet.getString(8));
 			workItems.add(workItem);
 		}
 		System.out.println("After loop grid");

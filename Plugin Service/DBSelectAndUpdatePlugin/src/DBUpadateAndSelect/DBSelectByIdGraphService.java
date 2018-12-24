@@ -85,7 +85,7 @@ public class DBSelectByIdGraphService  extends PluginService {
 		System.out.println("enter plugin");
 		String caseId=request.getParameter("caseId");
 		 String sqlStmt=" {call SELECT_BY_ID(?) }";
-		 DecimalFormat crunchifyFormatter = new DecimalFormat("###,###");
+		 DecimalFormat crunchifyFormatter = new DecimalFormat("##,##");
 		 CallableStatement callStmt;
 		 Connection conn;
 		 Gson gson=new Gson();
@@ -99,13 +99,12 @@ public class DBSelectByIdGraphService  extends PluginService {
 		while (rstSet.next())
 		{
 			if(rstSet.getDate(3)!=null){
-			System.out.println(rstSet.getString(9)+"  loop graph");
+			System.out.println(rstSet.getString(7)+"  loop graph");
 			WorkItem workItem = new WorkItem();
 			workItem.setReceviedAt(rstSet.getDate(2));
 			workItem.setCompletedAt(rstSet.getDate(3));	
-			long diff =rstSet.getDate(2).getTime()-rstSet.getDate(2).getTime()/ (60 * 60 * 1000);
-			workItem.setTime(crunchifyFormatter.format(diff));
-			workItem.setStepName(rstSet.getString(9));
+			workItem.setTime(rstSet.getInt(10));
+			workItem.setStepName(rstSet.getString(7));
 			workItems.add(workItem);
 			}
 		}

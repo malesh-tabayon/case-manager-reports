@@ -14,7 +14,7 @@ public class WorkItem
 	private Date receviedAt;
 	private String Creator;
 	private Date completedAt;
-	private String  time ;
+	private long  time ;
 	public String getStepName() {
 		return stepName;
 	}
@@ -53,12 +53,10 @@ public class WorkItem
 	public void setCompletedAt(Date completedAt) {
 		this.completedAt = completedAt;
 	}
-	public String getTime() {
+	public long getTime() {
 		return time;
 	}
-	public void setTime(String time) {
+	public void setTime(long time) {
 		this.time = time;
-	}       
-	
-	
+	}
 }
