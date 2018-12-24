@@ -43,6 +43,7 @@ public class WorkItem
 	public String getCreator() {
 		return Creator;
 	}
+	
 	public void setCreator(String creator) {
 		Creator = creator;
 	}
@@ -57,9 +58,7 @@ public class WorkItem
 	}
 	public void setTime(String time) {
 		this.time = time;
-	}
-	
-       
+	}       
 	
 	
 }
