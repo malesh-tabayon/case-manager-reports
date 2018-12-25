@@ -21,6 +21,7 @@
 
 ![alt Datafield](https://github.com/tabayonit/case-manager-reports/blob/master/images/Main%20Workflow.PNG)
 
-7-Create IBM Plug-in Select Data from DB
-8-Deploy IBM Plug-in in IBM-Navigator 
-9-Create Widget that Connect to Previous IBM Plug-in To display Data.
+7-Deploy IBM Plug-in in IBM-Navigator 
+->You can Find  IBM Plug-in Service in (/Plugin Service)
+8-Deploy Widget that Connect to Previous IBM Plug-in To display Data.
+->You can Find Widgets  in (/Widget)
