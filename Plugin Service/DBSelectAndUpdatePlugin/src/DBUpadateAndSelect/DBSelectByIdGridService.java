@@ -90,23 +90,23 @@ public class DBSelectByIdGridService extends PluginService {
 		 ArrayList workItems=new ArrayList();
 		conn=ConnectionDataBase.getConnection();
 		callStmt=conn.prepareCall(sqlStmt); 
+		callStmt.setString(1,caseId);
 		ResultSet rstSet=callStmt.executeQuery();
 		
 		System.out.println("before loop grid" );
 		while (rstSet.next())
 		{
-			System.out.println(rstSet.getString(7)+"  loop grid");
+			System.out.println(rstSet.getString("step_name")+"  loop grid");
 			WorkItem workItem = new WorkItem();
-			workItem.setCreator(rstSet.getString(1));
-			workItem.setReceviedAt(rstSet.getDate(2));
-			workItem.setCompletedAt(rstSet.getDate(3));
+			workItem.setCreator(rstSet.getString("creater"));
+			workItem.setReceviedAt(rstSet.getDate("recevied_at"));
+			workItem.setCompletedAt(rstSet.getDate("completed_at"));
 			if(rstSet.getDate(3)!=null){
-			workItem.setTime(rstSet.getInt(10));
-			
+			workItem.setTime(rstSet.getInt("duration"));
 			}
-			workItem.setStatus(rstSet.getString(6));
-			workItem.setStepName(rstSet.getString(7));
-      		workItem.setStepOwner(rstSet.getString(8));
+			workItem.setStatus(rstSet.getString("status"));
+			workItem.setStepName(rstSet.getString("step_name"));
+      		workItem.setStepOwner(rstSet.getString("step_owner"));
 			workItems.add(workItem);
 		}
 		System.out.println("After loop grid");
