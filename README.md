@@ -6,7 +6,7 @@
 2- Create Three Procedure For Insert,Update and Select 
  ->You can Find Query Structure in (/ Recources Folder)
 3- add Datafield for Eeach Task in Your Case Type
-![alt Datafield](http://url/to/img.png)
+![alt Datafield](https://github.com/tabayonit/case-manager-reports/blob/master/images/dataField.PNG)
 4- Add  Sub-Map in Workflow  for insert the Step information in DB that Execution before Each Step
 
 5-Add  Sub-Map in Workflow  for Update the Step information in DB that Execution after Each Step
