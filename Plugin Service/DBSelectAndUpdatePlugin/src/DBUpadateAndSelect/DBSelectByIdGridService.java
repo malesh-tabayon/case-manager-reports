@@ -87,7 +87,7 @@ public class DBSelectByIdGridService extends PluginService {
 		 CallableStatement callStmt;
 		 Connection conn;
 		 Gson gson=new Gson();
-		 ArrayList workItems=new ArrayList();
+		 ArrayList<WorkItem> workItems=new ArrayList<WorkItem>();
 		conn=ConnectionDataBase.getConnection();
 		callStmt=conn.prepareCall(sqlStmt); 
 		callStmt.setString(1,caseId);
@@ -96,11 +96,12 @@ public class DBSelectByIdGridService extends PluginService {
 		System.out.println("before loop grid" );
 		while (rstSet.next())
 		{
-			System.out.println(rstSet.getString("step_name")+"  loop grid");
+			System.out.println(rstSet.getString(1)+"  loop grid");
 			WorkItem workItem = new WorkItem();
-			workItem.setCreator(rstSet.getString("creater"));
+			workItem.setCreator(rstSet.getString(1));
 			workItem.setReceviedAt(rstSet.getDate("recevied_at"));
 			workItem.setCompletedAt(rstSet.getDate("completed_at"));
+			workItem.setCompletedBy(rstSet.getString("completed_by"));
 			if(rstSet.getDate(3)!=null){
 			workItem.setTime(rstSet.getInt("duration"));
 			}

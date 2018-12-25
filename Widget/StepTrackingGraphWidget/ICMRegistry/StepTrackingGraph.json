@@ -13,11 +13,19 @@
 	"events":[
 	
 		{
-			"id": "custom.steptrackinggraphwidget",
-			"title": "receiveEventPageOpened",
-			"functionName": "receiveEventPageOpened",
+			"id": "custom.steptrackinggraphwidgetsendworkitemevent",
+			"title": "receiveEventSendWorkItem",
+			"functionName": "receiveEventSendWorkItem",
 			"direction": "subscribed",
-			"description": "caseAdded"
+			"description": "workItemAdded"
+		},
+		
+			{
+			"id": "custom.steptrackinggraphwidgetsendcaseinformation",
+			"title": "receiveEventSendCaseInformation",
+			"functionName": "receiveEventSendCaseInformation",
+			"direction": "subscribed",
+			"description": "caseInformationAdded"
 		}
 	]
 }

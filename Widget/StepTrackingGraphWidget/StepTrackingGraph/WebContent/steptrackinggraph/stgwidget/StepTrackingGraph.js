@@ -17,6 +17,7 @@ define([
            
             arrayOfYAxis: [],
             arrayOfXAxis : [],
+            caseIdentifier : null,
         
        
          
@@ -32,10 +33,12 @@ define([
         },
 
         invokePlugin:function(){
+        
 
             var _self = this ;
             var requestParams = {};
-            requestParams.caseId="06FB7A9D353B6A4A99AF1840EF7168BE";
+            console.log("Biiiig Test ",_self.caseIdentifier)
+            requestParams.caseId=_self.caseIdentifier;
             ecm.model.Request.invokePluginService("DBUpdateAndSelectPlugin", "DBSelectByIdGraphService ", {
                 requestParams : requestParams, 
     				
@@ -56,14 +59,14 @@ define([
                             text: data_list[i].stepName
                         });
                         _self.arrayOfYAxis.push({
-                            y: i+1
+                            y: data_list[i].time
                         });
                         console.log("response returned test 120 " ,_self.arrayOfXAxis[i]);
-                       
+                        console.log("response returned test 1202 " ,_self.arrayOfYAxis[i]);
                           }
 
                        _self.createChart();
-                       _self.receiveEventPageOpened();
+
                         }
                     },
 
@@ -82,14 +85,7 @@ define([
                 titleFontColor: "orange"
               });
         
-              var labels = [
-           
-            {value: 1,text: "Mohamed"},
-            {value: 2,text: "Ali"},
-            {value: 3,text: "Amen"},
-            {value: 4,text: "farid"}, {value: 5,text: "Ahmed"}
-            // and so on
-               ];
+     
             caseChart.addPlot("default", { type: Columns, minBarSize: 10, maxBarSize: 20 });
               caseChart.addAxis("x",{labels: _self.arrayOfXAxis});
               caseChart.addAxis("y",{vertical: true, fixUpper: "major", includeZero: true});
@@ -105,10 +101,36 @@ define([
          
         },
         
-        receiveEventPageOpened:function(){
-        console.log("Enter receiveEventPageOpened")
-        	
-        }
+        receiveEventSendWorkItem:function(payload){
+            var _self = this ;
+        console.log("Enter receiveEventSendWorkItem" , payload);
+        console.log("Enter workItemEditable" , payload.workItemEditable);
+        payload.workItemEditable.icmWorkItem.caseObject.retrieveCachedAttributes(
+            function(caseObject) {
+                console.log("DEBUG-retrieveCachedAttributes-ENTRY");
+                var caseID = caseObject.caseIdentifier;
+                _self.caseIdentifier = caseID;
+                console.log("caseIDIdentdier: "+_self.caseIdentifier);    
+             });
+			      	
+			      
+      	        },
+        receiveEventSendCaseInformation:function(payload){
+            var _self = this ;
+            console.log("Enter receiveEventSendCaseInformation" , payload);
+            console.log("Enter workItemEditable" , payload.workItemEditable);
+
+            payload.workItemEditable.icmWorkItem.caseObject.retrieveCachedAttributes(
+                function(caseObject) {
+                    console.log("DEBUG-retrieveCachedAttributes-ENTRY");
+                    var caseID = caseObject.caseIdentifier;
+                    _self.caseIdentifier = caseID;
+                    console.log("caseIDIdentdier: "+_self.caseIdentifier);    
+                  
+                 });
+	      
+        },
+
         
         
 	});

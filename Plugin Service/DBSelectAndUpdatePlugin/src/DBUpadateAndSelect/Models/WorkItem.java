@@ -12,8 +12,9 @@ public class WorkItem
 	private String stepOwner;
 	private String status;
 	private Date receviedAt;
-	private String Creator;
+	private String creator;
 	private Date completedAt;
+	private String completedBy;
 	private long  time ;
 	public String getStepName() {
 		return stepName;
@@ -40,18 +41,25 @@ public class WorkItem
 		this.receviedAt = receviedAt;
 	}
 	
-	public String getCreator() {
-		return Creator;
-	}
 	
+	public String getCreator() {
+		return creator;
+	}
 	public void setCreator(String creator) {
-		Creator = creator;
+		this.creator = creator;
 	}
 	public Date getCompletedAt() {
 		return completedAt;
 	}
 	public void setCompletedAt(Date completedAt) {
 		this.completedAt = completedAt;
+	}
+	
+	public String getCompletedBy() {
+		return completedBy;
+	}
+	public void setCompletedBy(String completedBy) {
+		this.completedBy = completedBy;
 	}
 	public long getTime() {
 		return time;

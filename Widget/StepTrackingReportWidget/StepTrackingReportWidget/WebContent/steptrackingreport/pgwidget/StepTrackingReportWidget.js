@@ -8,7 +8,8 @@ define([
     	"dojo/data/ItemFileWriteStore"
     ], function(declare, json, BasePageWidget, _BaseWidget, template, request,DataGrid,ItemFileWriteStore){
     	return declare("steptrackingreport.pgwidget.StepTrackingReportWidget", [_BaseWidget, BasePageWidget], {
-    		templateString: template,
+            templateString: template,
+            caseIdentifier : null,
     		data : {
                 identifier: 'id',
     			items : []
@@ -22,14 +23,17 @@ define([
     			}, 500);
     		},
     		getReportData : function() {
-    			var _self = this ;
+                var _self = this ;
+                var requestParams = {};
+                console.log("Biiiig Test ",_self.caseIdentifier)
+                requestParams.caseId=_self.caseIdentifier;
     			// our Working Code
     			 console.log("Executed main require!");
                  console.log("enter function ");
     			
     	
-    			ecm.model.Request.invokePluginService("DBUpdateAndSelectPlugin", "DBSelectService", {
-    				
+    			ecm.model.Request.invokePluginService("DBUpdateAndSelectPlugin", "DBSelectByIdGridService", {
+                    requestParams : requestParams, 
     				requestCompleteCallback : function(response) {
     					console.log("enter function33333 ");
     					if (!response || response.length == 0) {
@@ -43,81 +47,9 @@ define([
                               for(var i=0;i<data_list.length; i++){
                              _self.data.items.push( dojo.mixin({ id: i+1 },data_list[i]));
                               }
-                           console.log("response returned test 40 " ,_self.data.items[40]);
-                           	function getRowIcon(item) {  
-                            var src = "/ICMClient/icm/css/images/idl/attachment_24.svg";
-                            return '<img width="14" height="14" src="' + src + '" /> ';
-
-                                }
-                           var store = new dojo.data.ItemFileWriteStore({
-                               data : _self.data
-                           });
-            /* set up layout */
-                            var layout = [[
-                                {
-                                name : "Num",
-                                field : "id",
-                                width : "10%",
-                                height : "10%"
-                            },{
-                                name : "Step Name",
-                                field : "stepName",
-                                width : "18%",
-                                height : "18%"
-                            }, {
-                                name : "Step Onwer",
-                                field :"stepOwner",
-                                width :  "18%",
-                                height : "18%"
-                            },{
-                                
-                                name : "Status",
-                                field :"status",
-                                width : " 18%",
-                                height : "18%"
-                                
-                            },{
-                                name : "Recevied At",
-                                field :"receviedAt",
-                                width : "18%",
-                                height : "18%"
-                                
-                            },{
-                                name : "Created By",
-                                field :"Who",
-                                width : "18%",
-                                height : "18%"
-                                
-                            }
-
-                            ]];
-//                           	if(_self.grid){
-//    				    _self.grid.destroyRecursive();
-//                                }
-//                           _self.grid = new dojox.grid.DataGrid ({
-//                            id : 'grid',
-//                            store : store,
-//                            structure : layout,
-//                            rowSelector : '20x'
-//                            });
-//                           
-//                               setTimeout(function() {
-//                                   console.log("enter here")
-//                                   _self.grid.startup()
-//                               }, 300);
-                    var grid = new dojox.grid.DataGrid({
-                    id: 'grid',
-                    store: store,
-                    structure: layout,
-                    rowSelector: '20px'},
-                        document.createElement('div'));
-
-                /*append the new grid to the div*/
-                           dojo.byId("gridDiv").appendChild(grid.domNode);
-
-                /*Call startup() to render the grid*/
-                           grid.startup();
-
+                           console.log("response returned test 40 " ,_self.data.items[1]);
+                           _self.drawReportGrid();
+                          
                            
     					return;
     				   }
@@ -127,25 +59,122 @@ define([
     	
     			});
 
-    		}
+            },
+            drawReportGrid:function(){
+                var _self = this ;
+                console.log("Enter here drawReportGrid ");
+                var store = new dojo.data.ItemFileWriteStore({
+                    data : _self.data
+                });
+ /* set up layout */
+                 var layout = [[
+                     {
+                     name : "Num",
+                     field : "id",
+                     width : "10%",
+                     height : "10%"
+                 },{
+                     name : "Step Name",
+                     field : "stepName",
+                     width : "11%",
+                     height : "11%"
+                 }, {
+                     name : "Step Onwer",
+                     field :"stepOwner",
+                     width :  "11%",
+                     height : "11%"
+                 },{
+                     
+                     name : "Status",
+                     field :"status",
+                     width : "11%",
+                     height : "11%"
+                     
+                 },{
+                     name : "Recevied at",
+                     field :"receviedAt",
+                     width : "11%",
+                     height : "11%"
+                     
+                 },{
+                    name : "Completed at",
+                    field :"completedAt",
+                    width : "11%",
+                    height : "11%"
+                    
+                },{
+                    name : "Duration Munites",
+                    field :"time",
+                    width :"11%",
+                    height : "11%"
+                    
+                },{
+                     name : "Created By",
+                     field :"creator",
+                     width : "11%",
+                     height : "11%"
+                     
+                 },{
+                    name : "Completed By",
+                    field :"completedBy",
+                    width : "13%",
+                    height :"13%"
+                    
+                }
+
+                 ]];
+
+         var grid = new dojox.grid.DataGrid({
+         id: 'grid',
+         store: store,
+         structure: layout,
+         rowSelector: '20px'},
+             document.createElement('div'));
+
+     /*append the new grid to the div*/
+                dojo.byId("gridDiv").appendChild(grid.domNode);
+
+     /*Call startup() to render the grid*/
+                grid.startup();
+
+
+
+            },
+            receiveEventSendWorkItem:function(payload){
+                var _self = this ;
+            console.log("Enter receiveEventSendWorkItem" , payload);
+            console.log("Enter workItemEditable" , payload.workItemEditable);
+            payload.workItemEditable.icmWorkItem.caseObject.retrieveCachedAttributes(
+                function(caseObject) {
+                    console.log("DEBUG-retrieveCachedAttributes-ENTRY");
+                    var caseID = caseObject.caseIdentifier;
+                    _self.caseIdentifier = caseID;
+                    console.log("caseIDIdentdier: "+_self.caseIdentifier);    
+                 });
+                          
+                          _self.sendCaseIdentifier();
+                      },
+            receiveEventSendCaseInformation:function(payload){
+                var _self = this ;
+                console.log("Enter receiveEventSendCaseInformation" , payload);
+                console.log("Enter workItemEditable" , payload.workItemEditable);
+    
+                payload.workItemEditable.icmWorkItem.caseObject.retrieveCachedAttributes(
+                    function(caseObject) {
+                        console.log("DEBUG-retrieveCachedAttributes-ENTRY");
+                        var caseID = caseObject.caseIdentifier;
+                        _self.caseIdentifier = caseID;
+                        console.log("caseIDIdentdier: "+_self.caseIdentifier);    
+                      
+                     });
+              
+                  _self.sendCaseIdentifier();
+            },
+            sendCaseIdentifier:function(){
+                console.log("Enter sendCaseIdentifier ");
+                  var _self = this ;
+    
+                
+            }
     	});
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
