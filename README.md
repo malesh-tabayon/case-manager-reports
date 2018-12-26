@@ -38,4 +38,5 @@ this Widgets generate reports grid/graph, for every case contains the case step 
 1-graph Demo
 ![alt Datafield](https://github.com/tabayonit/case-manager-reports/blob/master/images/graph.PNG)
 2-data grid Demo
+
 ![alt Datafield](https://github.com/tabayonit/case-manager-reports/blob/master/images/widget%20that%20display%20data%20grid.PNG)
