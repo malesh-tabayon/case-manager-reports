@@ -2,7 +2,7 @@
 
 # Important Note
 
-This is simple reporting widget and not replacement for [IBM Case Analyzer](#https://www.ibm.com/support/knowledgecenter/en/SSNW2F_5.2.1/com.ibm.p8.ce.admin.tasks.doc/bpfad043.htm) that is rich with features.
+This is simple reporting widget and not replacement for [IBM Case Analyzer](https://www.ibm.com/support/knowledgecenter/en/SSNW2F_5.2.1/com.ibm.p8.ce.admin.tasks.doc/bpfad043.htm) that is rich with features.
 
 # Summery
 this Widgets generate reports grid/graph, for every case contains the case step owner, action, start time, end time, duration...etc   
