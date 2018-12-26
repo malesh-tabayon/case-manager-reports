@@ -25,29 +25,28 @@ define([
     		getReportData : function() {
                 var _self = this ;
                 var requestParams = {};
-                console.log("Biiiig Test ",_self.caseIdentifier)
+               
                 requestParams.caseId=_self.caseIdentifier;
     			// our Working Code
-    			 console.log("Executed main require!");
-                 console.log("enter function ");
+
     			
     	
     			ecm.model.Request.invokePluginService("DBUpdateAndSelectPlugin", "DBSelectByIdGridService", {
                     requestParams : requestParams, 
     				requestCompleteCallback : function(response) {
-    					console.log("enter function33333 ");
+    					
     					if (!response || response.length == 0) {
-    						console.log("nothing returned ");
+    						
     						return;
     					}
     				   else{
                            
-    					console.log("response returned " , response);
+    					
                          var data_list = JSON.parse(response.result);
                               for(var i=0;i<data_list.length; i++){
                              _self.data.items.push( dojo.mixin({ id: i+1 },data_list[i]));
                               }
-                           console.log("response returned test 40 " ,_self.data.items[1]);
+                           
                            _self.drawReportGrid();
                           
                            
@@ -62,7 +61,7 @@ define([
             },
             drawReportGrid:function(){
                 var _self = this ;
-                console.log("Enter here drawReportGrid ");
+               
                 var store = new dojo.data.ItemFileWriteStore({
                     data : _self.data
                 });
@@ -142,36 +141,36 @@ define([
             },
             receiveEventSendWorkItem:function(payload){
                 var _self = this ;
-            console.log("Enter receiveEventSendWorkItem" , payload);
-            console.log("Enter workItemEditable" , payload.workItemEditable);
+       
+           
             payload.workItemEditable.icmWorkItem.caseObject.retrieveCachedAttributes(
                 function(caseObject) {
-                    console.log("DEBUG-retrieveCachedAttributes-ENTRY");
+
                     var caseID = caseObject.caseIdentifier;
                     _self.caseIdentifier = caseID;
-                    console.log("caseIDIdentdier: "+_self.caseIdentifier);    
+                     
                  });
                           
                           _self.sendCaseIdentifier();
                       },
             receiveEventSendCaseInformation:function(payload){
                 var _self = this ;
-                console.log("Enter receiveEventSendCaseInformation" , payload);
-                console.log("Enter workItemEditable" , payload.workItemEditable);
+               
+              
     
                 payload.workItemEditable.icmWorkItem.caseObject.retrieveCachedAttributes(
                     function(caseObject) {
-                        console.log("DEBUG-retrieveCachedAttributes-ENTRY");
+                        
                         var caseID = caseObject.caseIdentifier;
                         _self.caseIdentifier = caseID;
-                        console.log("caseIDIdentdier: "+_self.caseIdentifier);    
+                        
                       
                      });
               
                   _self.sendCaseIdentifier();
             },
             sendCaseIdentifier:function(){
-                console.log("Enter sendCaseIdentifier ");
+            
                   var _self = this ;
     
                 
