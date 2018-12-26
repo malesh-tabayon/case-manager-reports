@@ -34,3 +34,8 @@ this Widgets generate reports grid/graph, for every case contains the case step 
 ->You can Find  IBM Plug-in Service in (/Plugin Service)  
 2-Deploy Widget that Connects to Previous IBM Plug-in To display Data.  
 ->You can Find Widgets  in (/Widget)  
+# Demo
+1-graph Demo
+![alt Datafield](https://github.com/tabayonit/case-manager-reports/blob/master/images/graph.PNG)
+2-data grid Demo
+![alt Datafield](https://github.com/tabayonit/case-manager-reports/blob/master/images/widget%20that%20display%20data%20grid.PNG)
